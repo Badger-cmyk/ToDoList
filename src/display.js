@@ -42,6 +42,7 @@ export function initEventListeners(){
     const closeBtn = document.querySelector('.close-btn')
     const projectForm = document.querySelector('#project-form')
     const projectInput = document.querySelector('#project-name')
+    const projectList = document.querySelector('#project-lists')
 
     projectBtn.addEventListener('click', (e) => {
         e.preventDefault()
@@ -55,7 +56,7 @@ export function initEventListeners(){
 
     projectForm.addEventListener('submit', (e) => {
         e.preventDefault()
-        
+
         let projectName = projectInput.value;
 
         if(!projectName) return
@@ -69,6 +70,16 @@ export function initEventListeners(){
             renderProjects()
             projectInput.value = ''
             modal.style.display = 'none'
+        }
+    })
+
+    projectList.addEventListener('click', (e) => {
+        e.preventDefault()
+
+        if(e.target.closest('.bin')){
+            const project = e.target.closest('.project')
+            deleteProject(project.dataset.id)
+            renderProjects()
         }
     })
 

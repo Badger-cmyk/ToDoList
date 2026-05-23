@@ -35,3 +35,19 @@ export function renderProjects(){
         projectsContainer.append(projectContainer)
     });
 }
+
+export function initEventListeners(){
+    const projectBtn = document.querySelector('.new-project')
+    const modal = document.querySelector('.modal')
+    const closeBtn = document.querySelector('.close-btn')
+
+    projectBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        modal.style.display = 'block'
+    })
+
+    closeBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        modal.style.display = 'none'
+    })
+}

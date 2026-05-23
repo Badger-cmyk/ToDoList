@@ -36,7 +36,7 @@ export function editProject(projectId, newName){
     }
 }
 
-export function editTodo(projectId, todoId, newTitle, newDescription){
+export function editTodo(projectId, todoId){
     const project = projects.find((project) => project.id === projectId)
 
     if(project){

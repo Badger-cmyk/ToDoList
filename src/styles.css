@@ -119,3 +119,36 @@ body {
     justify-content: center;
     padding: 0.5rem 0
 }
+
+.modal {
+    display: none;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    padding: 1rem;
+    margin: 0.5rem 0;
+}
+
+#project-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+#project-form div:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#project-form div:nth-of-type(2) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#project-name {
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+}

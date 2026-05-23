@@ -43,6 +43,13 @@ export function initEventListeners(){
     const projectForm = document.querySelector('#project-form')
     const projectInput = document.querySelector('#project-name')
     const projectList = document.querySelector('#project-lists')
+    const editProjectModal = document.querySelector('.edit-project-modal')
+    const editProjectInput = document.querySelector('#edit-project-name')
+    const editProjectForm = document.querySelector('#edit-project-form')
+    const closeEditBtn = document.querySelector('.close-edit-btn')
+
+    let currentProjectId
+
 
     projectBtn.addEventListener('click', (e) => {
         e.preventDefault()
@@ -53,6 +60,12 @@ export function initEventListeners(){
         e.preventDefault()
         modal.style.display = 'none'
     })
+
+    closeEditBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        editProjectModal.style.display = 'none'
+    })
+
 
     projectForm.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -81,7 +94,32 @@ export function initEventListeners(){
             deleteProject(project.dataset.id)
             renderProjects()
         }
+        else if(e.target.closest('.edit')){
+            const project = e.target.closest('.project')
+            const currentName = getProjects().find((proj) => proj.id === project.dataset.id).name
+            currentProjectId = project.dataset.id
+            editProjectModal.style.display = 'flex'
+            editProjectInput.value = currentName
+        }
     })
 
+    editProjectForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+
+        let projectName = editProjectInput.value;
+
+        if(!projectName) return
+
+        if(projectName){
+            projectName = projectName.charAt(0).toUpperCase() + projectName.slice(1).toLowerCase()
+
+            editProject(currentProjectId, projectName)
+
+            renderProjects()
+            editProjectInput.value = ''
+            editProjectModal.style.display = 'none'
+        }
+
+    })
 
 }

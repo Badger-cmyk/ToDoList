@@ -40,6 +40,8 @@ export function initEventListeners(){
     const projectBtn = document.querySelector('.new-project')
     const modal = document.querySelector('.modal')
     const closeBtn = document.querySelector('.close-btn')
+    const projectForm = document.querySelector('#project-form')
+    const projectInput = document.querySelector('#project-name')
 
     projectBtn.addEventListener('click', (e) => {
         e.preventDefault()
@@ -50,4 +52,25 @@ export function initEventListeners(){
         e.preventDefault()
         modal.style.display = 'none'
     })
+
+    projectForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        
+        let projectName = projectInput.value;
+
+        if(!projectName) return
+
+        if(projectName){
+            projectName = projectName.charAt(0).toUpperCase() + projectName.slice(1).toLowerCase()
+
+            const newProject = createProject(projectName)
+            addProject(newProject)
+
+            renderProjects()
+            projectInput.value = ''
+            modal.style.display = 'none'
+        }
+    })
+
+
 }

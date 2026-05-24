@@ -98,10 +98,12 @@ body {
 .bin,
 .edit {
     opacity: 0;
+    cursor: pointer;
 }
 
 .project:hover .bin,
-.project:hover .edit {
+.project:hover .edit,
+.todo-container:hover .bin {
     opacity: 1;
 }
 
@@ -186,4 +188,30 @@ body {
 .close-btn {
     font-size: 1rem;
     cursor: pointer;
+}
+
+.todo-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+}
+
+.todo-container div:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.child-one-sub-one {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.child-one-sub-two {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }

@@ -48,6 +48,7 @@ export function renderTodos(projectId){
     project.todos.forEach((todo) => {
         const todoContainer = document.createElement('div')
         todoContainer.classList.add('todo-container')
+        todoContainer.dataset.id = todo.id
         
         const todoTitle = document.createElement('h4')
         todoTitle.textContent = todo.title
@@ -96,8 +97,10 @@ export function initEventListeners(){
     const editProjectInput = document.querySelector('#edit-project-name')
     const editProjectForm = document.querySelector('#edit-project-form')
     const closeEditBtn = document.querySelector('.close-edit-btn')
+    const mainArea = document.querySelector('.main-area')
 
     let currentProjectId
+    let currentlyViewedProjectId
 
 
     projectBtn.addEventListener('click', (e) => {
@@ -151,6 +154,7 @@ export function initEventListeners(){
             editProjectInput.value = currentName
         }else if(e.target.closest('.project')){
             const project = e.target.closest('.project')
+            currentlyViewedProjectId = project.dataset.id
             renderTodos(project.dataset.id)
         }
     })
@@ -172,6 +176,17 @@ export function initEventListeners(){
             editProjectModal.style.display = 'none'
         }
 
+    })
+
+    mainArea.addEventListener('click', (e) => {
+        e.preventDefault()
+
+        if(e.target.closest('.bin')){
+            const todo = e.target.closest('.todo-container')
+
+            deleteToDo(currentlyViewedProjectId,todo.dataset.id)
+            renderTodos(currentlyViewedProjectId)
+        }
     })
 
 }

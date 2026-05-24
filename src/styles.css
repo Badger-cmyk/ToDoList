@@ -88,6 +88,13 @@ body {
     justify-content: center;
 }
 
+.trash-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
 .bin,
 .edit {
     opacity: 0;

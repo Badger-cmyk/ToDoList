@@ -45,6 +45,14 @@ export function renderTodos(projectId){
 
     todosContainer.replaceChildren()
 
+    const addTodoBtn = document.createElement('button')
+    addTodoBtn.classList.add('new-todo')
+    const spanOne = document.createElement('span')
+    spanOne.textContent = `+`
+    const spanTwo = document.createElement('span')
+    spanTwo.textContent = `Add Todo`
+    addTodoBtn.append(spanOne, spanTwo)
+
     project.todos.forEach((todo) => {
         const todoContainer = document.createElement('div')
         todoContainer.classList.add('todo-container')
@@ -80,10 +88,9 @@ export function renderTodos(projectId){
         todoChildTwo.append(todoDes)
         todoContainer.append(todoChildOne, todoChildTwo) 
         todosContainer.append(todoContainer)
-
     })
 
-    console.log(`Showing todos inside ${project.name}`)
+    todosContainer.append(addTodoBtn)
 }
 
 export function initEventListeners(){

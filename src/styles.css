@@ -216,3 +216,35 @@ body {
     justify-content: center;
     gap: 1rem;
 }
+
+.main-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;    
+}
+
+.new-todo {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem;
+    align-items: center;
+    margin: 2rem;
+    background-color: transparent;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.new-todo:hover {
+    border: 2px solid #3f3f3f;
+}
+
+.new-todo span:first-of-type {
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.new-todo span:last-of-type {
+    font-weight: bold;
+    font-size: 1rem;
+}

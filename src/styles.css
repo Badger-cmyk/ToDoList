@@ -38,12 +38,13 @@ body {
     align-items: center;
     gap: 0.5rem;
     margin: 2rem 0;
+    padding: 0.5rem;
     cursor: pointer;
-    padding: 0 0.5rem;
+    background-color: transparent;
 }
 
 .new-project:hover {
-    background-color: #f0f0f0;
+    background-color:  #bebebe;
 }
 
 .projects {

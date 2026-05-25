@@ -105,6 +105,7 @@ export function initEventListeners(){
     const editProjectForm = document.querySelector('#edit-project-form')
     const closeEditBtn = document.querySelector('.close-edit-btn')
     const mainArea = document.querySelector('.main-area')
+    const addTodoModal = document.querySelector('.add-todo-modal')
 
     let currentProjectId
     let currentlyViewedProjectId
@@ -193,6 +194,10 @@ export function initEventListeners(){
 
             deleteToDo(currentlyViewedProjectId,todo.dataset.id)
             renderTodos(currentlyViewedProjectId)
+        }
+        else if(e.target.closest('.new-todo')){
+            console.log('todo button clicked')
+            addTodoModal.style.display = 'flex'
         }
     })
 

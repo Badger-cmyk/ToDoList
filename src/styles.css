@@ -248,3 +248,50 @@ body {
     font-weight: bold;
     font-size: 1rem;
 }
+
+.add-todo-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+#add-todo-form {
+    background-color: #f8f9fa;   
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.8rem;
+    min-width: 500px;
+}
+
+.todo-title,
+.todo-des {
+    padding: 0.5rem;
+    width: 90%;
+}
+
+.todo-date {
+    padding: 0.5rem;
+}
+
+.priority-radios {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.priority-radios input[type="radio"] {
+    cursor: pointer;
+}
+
+#add-todo-form button{
+    padding: 0.5rem;
+    width: 80px;
+    background: transparent;
+    cursor: pointer;
+}

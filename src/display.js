@@ -109,6 +109,10 @@ export function initEventListeners(){
     const addTodoForm = document.querySelector('#add-todo-form')
     const closeTodoBtn = document.querySelector('.close-todo-btn')
     const cancelTodoBtn = document.querySelector('.cancel-todo')
+    const todoTitle = document.querySelector('.todo-title')
+    const todoDes = document.querySelector('.todo-des')
+    const todoDate = document.querySelector('.todo-date')
+    
 
     let currentProjectId
     let currentlyViewedProjectId
@@ -163,7 +167,8 @@ export function initEventListeners(){
             currentProjectId = project.dataset.id
             editProjectModal.style.display = 'flex'
             editProjectInput.value = currentName
-        }else if(e.target.closest('.project')){
+        }
+        else if(e.target.closest('.project')){
             const project = e.target.closest('.project')
             currentlyViewedProjectId = project.dataset.id
             renderTodos(project.dataset.id)
@@ -214,6 +219,22 @@ export function initEventListeners(){
 
     addTodoForm.addEventListener('submit', (e) => {
         e.preventDefault()
+
+        const title = todoTitle.value
+        const des = todoDes.value
+        const date = todoDate.value
+        const priority = document.querySelector('input[name="priority"]:checked')?.value
+
+        console.log(currentlyViewedProjectId)
+
+        if(!title || !date || !priority) return
+
+        const newTodo = createToDo(title, des, date, priority)
+        addToDo(currentlyViewedProjectId, newTodo)
+
+        renderTodos(currentlyViewedProjectId)
+        addTodoForm.reset()
+        addTodoModal.style.display = 'none'
 
     })
 

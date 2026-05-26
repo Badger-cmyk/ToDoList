@@ -186,9 +186,20 @@ body {
 }
 
 .close-edit-btn,
-.close-btn {
+.close-btn
+{
     font-size: 1rem;
     cursor: pointer;
+    border: none;
+    padding: 0 0.3rem;
+    background-color: white;
+    
+}
+
+.close-edit-btn:hover,
+.close-btn:hover,
+.close-todo-btn:hover {
+    border: 1px solid black;
 }
 
 .todo-container {
@@ -269,6 +280,20 @@ body {
     min-width: 500px;
 }
 
+#add-todo-form > div:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.close-todo-btn {
+    font-size: 1.3rem;
+    cursor: pointer;
+    border: none;
+    padding: 0 0.3rem;
+    background-color: #f8f9fa;
+}
+
 .todo-title,
 .todo-des {
     padding: 0.5rem;
@@ -289,7 +314,7 @@ body {
     cursor: pointer;
 }
 
-#add-todo-form button{
+#add-todo-form div:last-of-type > button{
     padding: 0.5rem;
     width: 80px;
     background: transparent;

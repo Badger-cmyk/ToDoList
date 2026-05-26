@@ -106,6 +106,9 @@ export function initEventListeners(){
     const closeEditBtn = document.querySelector('.close-edit-btn')
     const mainArea = document.querySelector('.main-area')
     const addTodoModal = document.querySelector('.add-todo-modal')
+    const addTodoForm = document.querySelector('#add-todo-form')
+    const closeTodoBtn = document.querySelector('.close-todo-btn')
+    const cancelTodoBtn = document.querySelector('.cancel-todo')
 
     let currentProjectId
     let currentlyViewedProjectId
@@ -199,6 +202,19 @@ export function initEventListeners(){
             console.log('todo button clicked')
             addTodoModal.style.display = 'flex'
         }
+    })
+
+    closeTodoBtn.addEventListener('click', (e) => {
+        addTodoModal.style.display = 'none'
+    })
+
+    cancelTodoBtn.addEventListener('click', (e) => {
+        addTodoModal.style.display = 'none'
+    })
+
+    addTodoForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+
     })
 
 }

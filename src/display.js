@@ -206,6 +206,9 @@ export function initEventListeners(){
         else if(e.target.closest('.new-todo')){
             console.log('todo button clicked')
             addTodoModal.style.display = 'flex'
+
+            const today = new Date().toISOString().split('T')[0]
+            todoDate.min = today
         }
     })
 

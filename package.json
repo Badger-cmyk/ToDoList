@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "css-loader": "^7.1.4",
+    "date-fns": "^4.3.0",
     "style-loader": "^4.0.0"
   }
 }

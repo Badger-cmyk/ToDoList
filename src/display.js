@@ -1,6 +1,7 @@
 import { createToDo } from "./todo.js";
 import { createProject } from "./project.js";
 import { addProject, deleteProject, addToDo, deleteToDo, editProject, editTodo, toggleComplete, getProjects } from "./controller.js";
+import { format } from 'date-fns';
 
 export function renderProjects(){
     const projectsContainer = document.querySelector('#project-lists')
@@ -67,7 +68,7 @@ export function renderTodos(projectId){
         todoDes.textContent = todo.description
 
         const dueDate = document.createElement('p')
-        dueDate.textContent = `Due date: ${todo.dueDate}`
+        dueDate.textContent = `Due date: ${format(new Date(todo.dueDate), 'dd MMM, yyyy')}`
 
         const priority = document.createElement('p')
         priority.textContent = `Priority: ${todo.priority}`

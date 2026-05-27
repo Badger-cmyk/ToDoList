@@ -149,6 +149,11 @@ export function initEventListeners(){
             addProject(newProject)
 
             renderProjects()
+
+            currentlyViewedProjectId = newProject.id
+            document.querySelector('.main-area-heading').textContent = newProject.name
+            renderTodos(newProject.id)
+            
             projectInput.value = ''
             modal.style.display = 'none'
         }

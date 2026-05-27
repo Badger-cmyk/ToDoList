@@ -172,6 +172,10 @@ export function initEventListeners(){
         else if(e.target.closest('.project')){
             const project = e.target.closest('.project')
             currentlyViewedProjectId = project.dataset.id
+
+            const selectedProject = getProjects().find((proj) => proj.id === currentlyViewedProjectId)
+            document.querySelector('.main-area-heading').textContent = selectedProject.name
+
             renderTodos(project.dataset.id)
         }
     })
@@ -187,6 +191,10 @@ export function initEventListeners(){
             projectName = projectName.charAt(0).toUpperCase() + projectName.slice(1).toLowerCase()
 
             editProject(currentProjectId, projectName)
+            
+            if(currentlyViewedProjectId === currentlyViewedProjectId){
+                document.querySelector('.main-area-heading').textContent = projectName
+            }
 
             renderProjects()
             editProjectInput.value = ''

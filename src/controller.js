@@ -1,5 +1,9 @@
 let projects = []
 
+export function loadProjects(savedProjects){
+    projects = savedProjects
+}
+
 export function addProject(project){
     projects.push(project)
 }

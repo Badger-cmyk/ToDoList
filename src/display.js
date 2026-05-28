@@ -2,6 +2,7 @@ import { createToDo } from "./todo.js";
 import { createProject } from "./project.js";
 import { addProject, deleteProject, addToDo, deleteToDo, editProject, editTodo, toggleComplete, getProjects } from "./controller.js";
 import { format } from 'date-fns';
+import { saveToStorage, loadFromStorage } from "./storage.js";
 
 export function renderProjects(){
     const projectsContainer = document.querySelector('#project-lists')
@@ -147,6 +148,7 @@ export function initEventListeners(){
 
             const newProject = createProject(projectName)
             addProject(newProject)
+            saveToStorage()
 
             renderProjects()
 
@@ -165,6 +167,7 @@ export function initEventListeners(){
         if(e.target.closest('.bin')){
             const project = e.target.closest('.project')
             deleteProject(project.dataset.id)
+            saveToStorage()
             renderProjects()
         }
         else if(e.target.closest('.edit')){
@@ -197,10 +200,11 @@ export function initEventListeners(){
 
             editProject(currentProjectId, projectName)
             
-            if(currentlyViewedProjectId === currentlyViewedProjectId){
+            if(currentlyViewedProjectId === currentProjectId){
                 document.querySelector('.main-area-heading').textContent = projectName
             }
-
+              
+            saveToStorage()
             renderProjects()
             editProjectInput.value = ''
             editProjectModal.style.display = 'none'
@@ -215,6 +219,7 @@ export function initEventListeners(){
             const todo = e.target.closest('.todo-container')
 
             deleteToDo(currentlyViewedProjectId,todo.dataset.id)
+            saveToStorage()
             renderTodos(currentlyViewedProjectId)
         }
         else if(e.target.closest('.new-todo')){
@@ -248,6 +253,7 @@ export function initEventListeners(){
 
         const newTodo = createToDo(title, des, date, priority)
         addToDo(currentlyViewedProjectId, newTodo)
+        saveToStorage()
 
         renderTodos(currentlyViewedProjectId)
         addTodoForm.reset()

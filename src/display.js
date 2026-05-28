@@ -41,6 +41,44 @@ export function renderProjects(){
     });
 }
 
+function createTodoCard(todo){
+    const todoContainer = document.createElement('div')
+    todoContainer.classList.add('todo-container')
+    todoContainer.dataset.id = todo.id
+    
+    const todoTitle = document.createElement('h4')
+    todoTitle.textContent = todo.title
+    const todoCheck = document.createElement('input')
+    todoCheck.type = 'checkbox'
+
+    const todoDes = document.createElement('p')
+    todoDes.textContent = todo.description
+
+    const dueDate = document.createElement('p')
+    dueDate.textContent = `Due date: ${format(new Date(todo.dueDate), 'dd MMM, yyyy')}`
+
+    const priority = document.createElement('p')
+    priority.textContent = `Priority: ${todo.priority}`
+
+    const todoChildOne = document.createElement('div')
+    const todoChildTwo = document.createElement('div')
+    const childOneSubOne = document.createElement('div')
+    childOneSubOne.classList.add('child-one-sub-one')
+    const childOneSubTwo = document.createElement('div')
+    childOneSubTwo.classList.add('child-one-sub-two')
+    const svgTrashContainer = document.createElement('div')
+    svgTrashContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height=20 width=20 viewBox="0 0 24 24"><title>delete-outline</title><path d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" /></svg>`
+    svgTrashContainer.classList.add('svg-container', 'bin')
+
+    childOneSubOne.append(todoCheck, todoTitle)
+    childOneSubTwo.append(svgTrashContainer, dueDate, priority)
+    todoChildOne.append(childOneSubOne, childOneSubTwo)
+    todoChildTwo.append(todoDes)
+    todoContainer.append(todoChildOne, todoChildTwo) 
+
+    return todoContainer
+}
+
 export function renderTodos(projectId){
     const todosContainer = document.querySelector('.main-area')
     const project = getProjects().find((proj) => proj.id === projectId)
@@ -56,43 +94,28 @@ export function renderTodos(projectId){
     addTodoBtn.append(spanOne, spanTwo)
 
     project.todos.forEach((todo) => {
-        const todoContainer = document.createElement('div')
-        todoContainer.classList.add('todo-container')
-        todoContainer.dataset.id = todo.id
-        
-        const todoTitle = document.createElement('h4')
-        todoTitle.textContent = todo.title
-        const todoCheck = document.createElement('input')
-        todoCheck.type = 'checkbox'
-
-        const todoDes = document.createElement('p')
-        todoDes.textContent = todo.description
-
-        const dueDate = document.createElement('p')
-        dueDate.textContent = `Due date: ${format(new Date(todo.dueDate), 'dd MMM, yyyy')}`
-
-        const priority = document.createElement('p')
-        priority.textContent = `Priority: ${todo.priority}`
-
-        const todoChildOne = document.createElement('div')
-        const todoChildTwo = document.createElement('div')
-        const childOneSubOne = document.createElement('div')
-        childOneSubOne.classList.add('child-one-sub-one')
-        const childOneSubTwo = document.createElement('div')
-        childOneSubTwo.classList.add('child-one-sub-two')
-        const svgTrashContainer = document.createElement('div')
-        svgTrashContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height=20 width=20 viewBox="0 0 24 24"><title>delete-outline</title><path d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" /></svg>`
-        svgTrashContainer.classList.add('svg-container', 'bin')
-
-        childOneSubOne.append(todoCheck, todoTitle)
-        childOneSubTwo.append(svgTrashContainer, dueDate, priority)
-        todoChildOne.append(childOneSubOne, childOneSubTwo)
-        todoChildTwo.append(todoDes)
-        todoContainer.append(todoChildOne, todoChildTwo) 
-        todosContainer.append(todoContainer)
+        const todoCard = createTodoCard(todo)
+        todosContainer.append(todoCard)
     })
 
     todosContainer.append(addTodoBtn)
+}
+
+export function renderAllTasks() {
+    const todosContainer = document.querySelector('.main-area')
+
+    todosContainer.replaceChildren()
+
+    const projects = getProjects()
+
+    if(projects.length === 0) todosContainer.textContent = 'No Tasks To Complete'
+
+    projects.forEach(project => {
+        project.todos.forEach(todo => {
+            const todoCard = createTodoCard(todo)
+            todosContainer.append(todoCard)
+        })
+    })
 }
 
 export function initEventListeners(){
@@ -114,7 +137,7 @@ export function initEventListeners(){
     const todoTitle = document.querySelector('.todo-title')
     const todoDes = document.querySelector('.todo-des')
     const todoDate = document.querySelector('.todo-date')
-    
+    const allTasks = document.querySelector('.all-tasks')
 
     let currentProjectId
     let currentlyViewedProjectId
@@ -260,5 +283,13 @@ export function initEventListeners(){
         addTodoModal.style.display = 'none'
 
     })
+
+    allTasks.addEventListener('click', (e) => {
+        document.querySelector('.main-area-heading').textContent = 'All Tasks'
+        const projects = getProjects()
+        renderAllTasks()
+    })
+
+    
 
 }

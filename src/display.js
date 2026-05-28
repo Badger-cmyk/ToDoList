@@ -108,12 +108,25 @@ export function renderAllTasks() {
 
     const projects = getProjects()
 
-    if(projects.length === 0) todosContainer.textContent = 'No Tasks To Complete'
-
     projects.forEach(project => {
         project.todos.forEach(todo => {
             const todoCard = createTodoCard(todo)
             todosContainer.append(todoCard)
+        })
+    })
+}
+
+export function renderTodayTasks(){
+    const todosContainer = document.querySelector('.main-area')
+
+    todosContainer.replaceChildren()
+    const today = new Date().toISOString().split('T')[0]
+
+    getProjects().forEach((project) => {
+        project.todos.forEach((todo) => {
+            if(todo.dueDate === today){
+                todosContainer.append(createTodoCard(todo))
+            }
         })
     })
 }
@@ -138,6 +151,7 @@ export function initEventListeners(){
     const todoDes = document.querySelector('.todo-des')
     const todoDate = document.querySelector('.todo-date')
     const allTasks = document.querySelector('.all-tasks')
+    const todayTasks = document.querySelector('.today-tasks')
 
     let currentProjectId
     let currentlyViewedProjectId
@@ -286,8 +300,12 @@ export function initEventListeners(){
 
     allTasks.addEventListener('click', (e) => {
         document.querySelector('.main-area-heading').textContent = 'All Tasks'
-        const projects = getProjects()
         renderAllTasks()
+    })
+
+    todayTasks.addEventListener('click', (e) => {
+        document.querySelector('.main-area-heading').textContent = 'Due Today'
+        renderTodayTasks()
     })
 
     

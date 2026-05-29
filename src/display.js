@@ -260,7 +260,6 @@ export function initEventListeners(){
             renderTodos(currentlyViewedProjectId)
         }
         else if(e.target.closest('.new-todo')){
-            console.log('todo button clicked')
             addTodoModal.style.display = 'flex'
 
             const today = new Date().toISOString().split('T')[0]
@@ -283,8 +282,6 @@ export function initEventListeners(){
         const des = todoDes.value
         const date = todoDate.value
         const priority = document.querySelector('input[name="priority"]:checked')?.value
-
-        console.log(currentlyViewedProjectId)
 
         if(!title || !date || !priority) return
 

@@ -41,15 +41,18 @@ export function renderProjects(){
     });
 }
 
-function createTodoCard(todo){
+function createTodoCard(todo, projectId){
     const todoContainer = document.createElement('div')
     todoContainer.classList.add('todo-container')
     todoContainer.dataset.id = todo.id
+    todoContainer.dataset.projectId = projectId
     
     const todoTitle = document.createElement('h4')
     todoTitle.textContent = todo.title
+
     const todoCheck = document.createElement('input')
     todoCheck.type = 'checkbox'
+    todoCheck.checked = todo.completed
 
     const todoDes = document.createElement('p')
     todoDes.textContent = todo.description
@@ -76,6 +79,10 @@ function createTodoCard(todo){
     todoChildTwo.append(todoDes)
     todoContainer.append(todoChildOne, todoChildTwo) 
 
+    if(todo.completed) {
+        todoContainer.classList.add('completed')
+    }
+
     return todoContainer
 }
 
@@ -94,7 +101,7 @@ export function renderTodos(projectId){
     addTodoBtn.append(spanOne, spanTwo)
 
     project.todos.forEach((todo) => {
-        const todoCard = createTodoCard(todo)
+        const todoCard = createTodoCard(todo, project.id)
         todosContainer.append(todoCard)
     })
 
@@ -110,7 +117,7 @@ export function renderAllTasks() {
 
     projects.forEach(project => {
         project.todos.forEach(todo => {
-            const todoCard = createTodoCard(todo)
+            const todoCard = createTodoCard(todo, project.id)
             todosContainer.append(todoCard)
         })
     })
@@ -125,7 +132,7 @@ export function renderTodayTasks(){
     getProjects().forEach((project) => {
         project.todos.forEach((todo) => {
             if(todo.dueDate === today){
-                todosContainer.append(createTodoCard(todo))
+                todosContainer.append(createTodoCard(todo, project.id))
             }
         })
     })
@@ -250,8 +257,6 @@ export function initEventListeners(){
     })
 
     mainArea.addEventListener('click', (e) => {
-        e.preventDefault()
-
         if(e.target.closest('.bin')){
             const todo = e.target.closest('.todo-container')
 
@@ -305,6 +310,21 @@ export function initEventListeners(){
         renderTodayTasks()
     })
 
+    mainArea.addEventListener('change', (e) => {
+        if(e.target.matches('input[type="checkbox"]')){
+            const todoCard = e.target.closest('.todo-container')
+
+            toggleComplete(todoCard.dataset.projectId, todoCard.dataset.id)
+            saveToStorage()
+
+            renderTodos(todoCard.dataset.projectId)
+        }
+
+
+        // console.log(`
+        //     projectId: ${todoCard.dataset.projectId}
+        //     todoId: ${todoCard.dataset.id}`)
+    })
     
 
 }

@@ -17,7 +17,7 @@ body {
 }
 
 .right {
-    background-color: #9f2f2f;
+    background-color: #f5f5f5;
 }
 
 .logo {
@@ -206,6 +206,8 @@ body {
     display: flex;
     flex-direction: column;
     padding: 0 2rem;
+    background-color: white;
+    border-radius: 0.5rem;
 }
 
 .todo-container div:first-of-type {
@@ -232,7 +234,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 2rem;    
+    gap: 2rem;   
+    padding: 1rem 2rem; 
 }
 
 .new-todo {
@@ -319,4 +322,10 @@ body {
     width: 80px;
     background: transparent;
     cursor: pointer;
+}
+
+.completed h4,
+.completed p {
+    text-decoration: line-through;
+    opacity: 0.6;
 }

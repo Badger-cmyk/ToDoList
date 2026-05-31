@@ -319,11 +319,6 @@ export function initEventListeners(){
 
             renderTodos(todoCard.dataset.projectId)
         }
-
-
-        // console.log(`
-        //     projectId: ${todoCard.dataset.projectId}
-        //     todoId: ${todoCard.dataset.id}`)
     })
     
 
